@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri-Petal: Magical Girls - A Magical Trio Adventure RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #fbbf24, #f59e0b, #d97706);
+        }
+        .hero-bg {
+            background-image: url('https://placehold.co/1920x1080/1e293b/cbd5e1?text=Hero+Background+Image');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 1));
+            z-index: 1;
+        }
+        .content-layer {
+            position: relative;
+            z-index: 2;
+        }
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(251, 191, 36, 0.2), 0 8px 10px -6px rgba(251, 191, 36, 0.1);
+        }
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .carousel-slide img {
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        .store-btn {
+            transition: opacity 0.2s;
+        }
+        .store-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f59e0b',
+                        secondary: '#3b82f6',
+                        accent: '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white">
+    <nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 gap-4">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-primary text-xl"></i>
+                    <span class="font-bold text-xl tracking-wider">Tri-Petal</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-slate-300 hover:text-white transition" data-i18n="nav.features">特色</a>
+                    <a href="#screenshots" class="text-slate-300 hover:text-white transition" data-i18n="nav.screenshots">截圖</a>
+                    <a href="#download" class="text-slate-300 hover:text-white transition" data-i18n="nav.download">下載</a>
+                </div>
+                <label class="flex items-center gap-2 text-sm text-slate-300" aria-label="Language selector">
+                    <i class="fa-solid fa-globe"></i>
+                    <select id="languageSelect" class="bg-slate-900/90 border border-slate-700 rounded-md px-2 py-1 outline-none cursor-pointer hover:text-white focus:border-primary focus:ring-1 focus:ring-primary">
+                        <option value="en">English</option>
+                        <option value="zh-TW">中文</option>
+                        <option value="ja">日本語</option>
+                        <option value="ko">한국어</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg min-h-screen flex items-center justify-center pt-16">
+        <div class="content-layer text-center px-4 max-w-4xl mx-auto">
+            <div class="inline-block mb-4 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
+                <span class="text-sm font-medium text-primary" data-i18n="hero.badge">即將推出</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                Tri-Petal:<br class="md:hidden" />
+                <span class="text-gradient" data-i18n="hero.titleAccent">魔法少女</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-10 font-medium" data-i18n="hero.subtitle">三人魔法冒險 RPG</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+                <a href="#download" class="px-8 py-4 bg-primary text-slate-900 font-bold rounded-lg hover:bg-amber-400 transition-colors shadow-[0_0_15px_rgba(245,158,11,0.5)] flex items-center gap-2 text-lg">
+                    <i class="fa-solid fa-download"></i> <span data-i18n="hero.primaryCta">下載</span>
+                </a>
+                <a href="#features" class="px-8 py-4 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-700 transition-colors border border-slate-700 text-lg" data-i18n="hero.secondaryCta">探索特色</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="py-24 bg-slate-900 relative">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n-html="features.heading">遊戲 <span class="text-primary">特色</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto" data-i18n="features.description">與三位魔法少女相遇，收集資源，並在繽紛的 RPG 戰鬥中不斷成長。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center mb-6 text-3xl text-pink-300"><i class="fa-solid fa-wand-sparkles"></i></div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="features.card1.title">三位魔法女主角</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-i18n="features.card1.body">在三位擁有不同個性、定位與魔法能力的女主角之間切換。</p>
+                </div>
+                <div class="feature-card bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center mb-6 text-3xl text-amber-300"><i class="fa-solid fa-star"></i></div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="features.card2.title">角色養成</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-i18n="features.card2.body">培養隊伍、解鎖技能，讓每位少女成為更可靠的冒險夥伴。</p>
+                </div>
+                <div class="feature-card bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center mb-6 text-3xl text-red-300"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="features.card3.title">策略戰鬥</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-i18n="features.card3.body">規劃技能、時機與隊伍陣容，挑戰各式魔法關卡中的敵人。</p>
+                </div>
+                <div class="feature-card bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center mb-6 text-3xl text-blue-400"><i class="fa-solid fa-gem"></i></div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="features.card4.title">寶石收集</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-i18n="features.card4.body">收集寶石與資源，用來強化裝備、服裝與特殊能力。</p>
+                </div>
+                <div class="feature-card bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center mb-6 text-3xl text-green-400"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="features.card5.title">成長系統</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-i18n="features.card5.body">完成任務、獲得獎勵，穩定打造屬於你的魔法小隊。</p>
+                </div>
+                <div class="feature-card bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center mb-6 text-3xl text-purple-400"><i class="fa-solid fa-earth-americas"></i></div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="features.card6.title">多語言故事</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-i18n="features.card6.body">可從右上角選單切換英文、中文、日文或韓文，享受冒險劇情。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots" class="py-24 bg-slate-800 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n-html="screenshots.heading">遊戲 <span class="text-primary">截圖</span></h2>
+                <p class="text-slate-400" data-i18n="screenshots.description">預覽角色場景、戰鬥畫面與魔法世界。</p>
+            </div>
+            <div class="relative max-w-sm md:max-w-md mx-auto">
+                <div class="carousel-container rounded-2xl">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide"><img src="Screenshot_2026-05-31-09-08-51-52_028322bfffd37011d745473f7c677480.jpg" alt="Screenshot 1" class="w-full bg-slate-900" onerror="this.src='https://placehold.co/1080x2400/1e293b/cbd5e1?text=Screenshot+1';"></div>
+                        <div class="carousel-slide"><img src="Screenshot_2026-05-31-09-09-08-52_028322bfffd37011d745473f7c677480.jpg" alt="Screenshot 2" class="w-full bg-slate-900" onerror="this.src='https://placehold.co/1080x2400/1e293b/cbd5e1?text=Screenshot+2';"></div>
+                        <div class="carousel-slide"><img src="Screenshot_2026-05-31-09-09-19-11_028322bfffd37011d745473f7c677480.jpg" alt="Screenshot 3" class="w-full bg-slate-900" onerror="this.src='https://placehold.co/1080x2400/1e293b/cbd5e1?text=Screenshot+3';"></div>
+                        <div class="carousel-slide"><img src="Screenshot_2026-05-31-09-09-29-58_028322bfffd37011d745473f7c677480.jpg" alt="Screenshot 4" class="w-full bg-slate-900" onerror="this.src='https://placehold.co/1080x2400/1e293b/cbd5e1?text=Screenshot+4';"></div>
+                        <div class="carousel-slide"><img src="Screenshot_2026-05-31-09-09-35-15_028322bfffd37011d745473f7c677480.jpg" alt="Screenshot 5" class="w-full bg-slate-900" onerror="this.src='https://placehold.co/1080x2400/1e293b/cbd5e1?text=Screenshot+5';"></div>
+                    </div>
+                </div>
+                <button id="prevBtn" class="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2 bg-slate-800/80 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm border border-slate-600 z-10 transition" aria-label="Previous screenshot"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="nextBtn" class="absolute top-1/2 -right-4 md:-right-12 transform -translate-y-1/2 bg-slate-800/80 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm border border-slate-600 z-10 transition" aria-label="Next screenshot"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="flex justify-center mt-6 gap-2" id="carouselIndicators">
+                    <button class="w-3 h-3 rounded-full bg-primary transition-colors indicator" data-index="0" aria-label="Screenshot 1"></button>
+                    <button class="w-3 h-3 rounded-full bg-slate-600 transition-colors indicator" data-index="1" aria-label="Screenshot 2"></button>
+                    <button class="w-3 h-3 rounded-full bg-slate-600 transition-colors indicator" data-index="2" aria-label="Screenshot 3"></button>
+                    <button class="w-3 h-3 rounded-full bg-slate-600 transition-colors indicator" data-index="3" aria-label="Screenshot 4"></button>
+                    <button class="w-3 h-3 rounded-full bg-slate-600 transition-colors indicator" data-index="4" aria-label="Screenshot 5"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="py-24 bg-slate-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-5xl font-black mb-6" data-i18n="download.heading">準備展開冒險</h2>
+            <p class="text-xl text-slate-400 mb-10" data-i18n="download.description">Tri-Petal 即將推出。追蹤上市資訊，成為第一批玩家。</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                <button class="store-btn relative flex items-center justify-center bg-black border border-slate-700 rounded-xl px-6 py-3 min-w-[200px] cursor-not-allowed opacity-70 group">
+                    <div class="absolute inset-0 bg-slate-900/50 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 backdrop-blur-sm"><span class="text-sm font-bold text-white" data-i18n="download.comingSoon">即將推出</span></div>
+                    <i class="fa-brands fa-apple text-3xl mr-3"></i>
+                    <div class="text-left"><div class="text-xs text-slate-300">Download on the</div><div class="text-xl font-semibold leading-tight">App Store</div></div>
+                </button>
+                <button class="store-btn relative flex items-center justify-center bg-black border border-slate-700 rounded-xl px-6 py-3 min-w-[200px] cursor-not-allowed opacity-70 group">
+                    <div class="absolute inset-0 bg-slate-900/50 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 backdrop-blur-sm"><span class="text-sm font-bold text-white" data-i18n="download.comingSoon">即將推出</span></div>
+                    <i class="fa-brands fa-google-play text-2xl mr-3 text-white"></i>
+                    <div class="text-left"><div class="text-xs text-slate-300">GET IT ON</div><div class="text-xl font-semibold leading-tight">Google Play</div></div>
+                </button>
+            </div>
+            <div class="mt-12 text-sm text-slate-500" data-i18n="download.release">預計推出：2026</div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Section -->
+    <section id="privacy" class="py-20 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-black mb-2 text-white">隱私權政策 <span class="text-primary text-lg font-medium">Privacy Policy</span></h2>
+            <p class="text-slate-500 text-sm mb-8">最後更新：2026年5月 ／ Last updated: May 2026</p>
+
+            <div class="space-y-6 text-slate-400 text-sm leading-relaxed">
+                <div>
+                    <h3 class="text-white font-bold text-base mb-2">1. 資料收集 ／ Data We Collect</h3>
+                    <p>本遊戲（Tri-Petal: Magical Girls）不會主動收集您的個人識別資料。遊戲進度與設定儲存於您的裝置本地端（localStorage）。</p>
+                    <p class="mt-2">This game does not actively collect personally identifiable information. Game progress and settings are stored locally on your device.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-base mb-2">2. 第三方服務 ／ Third-Party Services</h3>
+                    <p>本遊戲使用以下第三方服務，這些服務可能依其各自政策收集資料：</p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong class="text-slate-300">Google AdMob</strong>：用於顯示廣告，可能收集廣告識別碼與使用行為。<a href="https://policies.google.com/privacy" target="_blank" class="text-primary underline">Google 隱私權政策</a></li>
+                        <li><strong class="text-slate-300">Google Play Billing</strong>：用於處理應用程式內購買，付款資料由 Google 處理。</li>
+                    </ul>
+                    <p class="mt-2">This game uses the following third-party services which may collect data per their own policies: Google AdMob (advertising), Google Play Billing (in-app purchases).</p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-base mb-2">3. 廣告 ／ Advertising</h3>
+                    <p>本遊戲透過 Google AdMob 顯示廣告。AdMob 可能根據您的裝置資訊提供個人化廣告。您可以在裝置設定中選擇退出個人化廣告。</p>
+                    <p class="mt-2">This game shows ads via Google AdMob. You may opt out of personalized ads through your device settings.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-base mb-2">4. 兒童隱私 ／ Children's Privacy</h3>
+                    <p>本遊戲適合全年齡，不會故意向 13 歲以下兒童收集個人資料。</p>
+                    <p class="mt-2">This game is suitable for all ages and does not knowingly collect personal data from children under 13.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-base mb-2">5. 聯絡我們 ／ Contact Us</h3>
+                    <p>如有任何隱私相關問題，請聯絡：<a href="mailto:barara.studio@gmail.com" class="text-primary underline">barara.studio@gmail.com</a></p>
+                    <p class="mt-2">For any privacy-related questions, please contact: <a href="mailto:barara.studio@gmail.com" class="text-primary underline">barara.studio@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-slate-500 text-sm">&copy; 2026 Barara Studio. All rights reserved.</div>
+            <div class="text-sm"><a href="#privacy" class="text-slate-400 hover:text-primary transition underline decoration-slate-600 hover:decoration-primary underline-offset-4" data-i18n="footer.privacy">隱私權政策</a></div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                title: 'Tri-Petal: Magical Girls - A Magical Trio Adventure RPG',
+                'nav.features': 'Features', 'nav.screenshots': 'Screenshots', 'nav.download': 'Download',
+                'hero.badge': 'Coming Soon', 'hero.titleAccent': 'Magical Girls', 'hero.subtitle': 'A Magical Trio Adventure RPG', 'hero.primaryCta': 'Download', 'hero.secondaryCta': 'Explore Features',
+                'features.heading': 'Game <span class="text-primary">Features</span>', 'features.description': 'Meet a magical trio, collect resources, and grow stronger through colorful RPG battles.',
+                'features.card1.title': 'Three Magical Heroines', 'features.card1.body': 'Switch between three heroines with distinct personalities, roles, and magical powers.',
+                'features.card2.title': 'Character Growth', 'features.card2.body': 'Train your team, unlock skills, and shape each girl into a stronger adventurer.',
+                'features.card3.title': 'Tactical Battles', 'features.card3.body': 'Plan skills, timing, and team formation to defeat enemies across magical stages.',
+                'features.card4.title': 'Gem Collection', 'features.card4.body': 'Collect gems and resources to upgrade equipment, outfits, and special abilities.',
+                'features.card5.title': 'Progression System', 'features.card5.body': 'Complete missions, earn rewards, and steadily build your magical squad.',
+                'features.card6.title': 'Multilingual Story', 'features.card6.body': 'Enjoy the adventure in English, Chinese, Japanese, or Korean from the top-right menu.',
+                'screenshots.heading': 'Game <span class="text-primary">Screenshots</span>', 'screenshots.description': 'Preview character scenes, battle screens, and the magical world.',
+                'download.heading': 'Get Ready for the Adventure', 'download.description': 'Tri-Petal is coming soon. Follow the launch and be the first to play.', 'download.comingSoon': 'Coming Soon', 'download.release': 'Planned release: 2026',
+                'footer.privacy': 'Privacy Policy', privacyMessage: 'Privacy Policy\n\nThis is a placeholder privacy policy. Please replace it with your official policy before release.'
+            },
+            'zh-TW': {
+                title: 'Tri-Petal：魔法少女 - 三人魔法冒險 RPG',
+                'nav.features': '特色', 'nav.screenshots': '截圖', 'nav.download': '下載',
+                'hero.badge': '即將推出', 'hero.titleAccent': '魔法少女', 'hero.subtitle': '三人魔法冒險 RPG', 'hero.primaryCta': '下載', 'hero.secondaryCta': '探索特色',
+                'features.heading': '遊戲 <span class="text-primary">特色</span>', 'features.description': '與三位魔法少女相遇，收集資源，並在繽紛的 RPG 戰鬥中不斷成長。',
+                'features.card1.title': '三位魔法女主角', 'features.card1.body': '在三位擁有不同個性、定位與魔法能力的女主角之間切換。',
+                'features.card2.title': '角色養成', 'features.card2.body': '培養隊伍、解鎖技能，讓每位少女成為更可靠的冒險夥伴。',
+                'features.card3.title': '策略戰鬥', 'features.card3.body': '規劃技能、時機與隊伍陣容，挑戰各式魔法關卡中的敵人。',
+                'features.card4.title': '寶石收集', 'features.card4.body': '收集寶石與資源，用來強化裝備、服裝與特殊能力。',
+                'features.card5.title': '成長系統', 'features.card5.body': '完成任務、獲得獎勵，穩定打造屬於你的魔法小隊。',
+                'features.card6.title': '多語言故事', 'features.card6.body': '可從右上角選單切換英文、中文、日文或韓文，享受冒險劇情。',
+                'screenshots.heading': '遊戲 <span class="text-primary">截圖</span>', 'screenshots.description': '預覽角色場景、戰鬥畫面與魔法世界。',
+                'download.heading': '準備展開冒險', 'download.description': 'Tri-Petal 即將推出。追蹤上市資訊，成為第一批玩家。', 'download.comingSoon': '即將推出', 'download.release': '預計推出：2026',
+                'footer.privacy': '隱私權政策', privacyMessage: '隱私權政策\n\n這是隱私權政策的暫用內容。正式發布前請替換為官方版本。'
+            },
+            ja: {
+                title: 'Tri-Petal：魔法少女 - 3人の魔法冒険RPG',
+                'nav.features': '特徴', 'nav.screenshots': 'スクリーンショット', 'nav.download': 'ダウンロード',
+                'hero.badge': '近日公開', 'hero.titleAccent': '魔法少女', 'hero.subtitle': '3人の魔法冒険RPG', 'hero.primaryCta': 'ダウンロード', 'hero.secondaryCta': '特徴を見る',
+                'features.heading': 'ゲームの <span class="text-primary">特徴</span>', 'features.description': '3人の魔法少女と出会い、資源を集め、色鮮やかなRPGバトルで成長しましょう。',
+                'features.card1.title': '3人の魔法ヒロイン', 'features.card1.body': '個性、役割、魔法能力が異なる3人のヒロインを切り替えて冒険します。',
+                'features.card2.title': 'キャラクター育成', 'features.card2.body': 'チームを育成し、スキルを解放して、少女たちを頼れる冒険者へ成長させます。',
+                'features.card3.title': '戦略バトル', 'features.card3.body': 'スキル、タイミング、編成を考え、魔法ステージの敵に挑みます。',
+                'features.card4.title': 'ジェム収集', 'features.card4.body': 'ジェムや資源を集めて、装備、衣装、特別な能力を強化します。',
+                'features.card5.title': '進行システム', 'features.card5.body': 'ミッションを達成し、報酬を獲得して、自分だけの魔法チームを育てます。',
+                'features.card6.title': '多言語ストーリー', 'features.card6.body': '右上のメニューから英語、中国語、日本語、韓国語に切り替えられます。',
+                'screenshots.heading': 'ゲーム <span class="text-primary">スクリーンショット</span>', 'screenshots.description': 'キャラクターシーン、バトル画面、魔法の世界をプレビューできます。',
+                'download.heading': '冒険の準備をしよう', 'download.description': 'Tri-Petal は近日公開予定です。リリース情報をチェックして、いち早くプレイしましょう。', 'download.comingSoon': '近日公開', 'download.release': 'リリース予定：2026',
+                'footer.privacy': 'プライバシーポリシー', privacyMessage: 'プライバシーポリシー\n\nこれは仮のプライバシーポリシーです。公開前に正式版へ差し替えてください。'
+            },
+            ko: {
+                title: 'Tri-Petal: 마법 소녀 - 세 명의 마법 모험 RPG',
+                'nav.features': '특징', 'nav.screenshots': '스크린샷', 'nav.download': '다운로드',
+                'hero.badge': '출시 예정', 'hero.titleAccent': '마법 소녀', 'hero.subtitle': '세 명의 마법 모험 RPG', 'hero.primaryCta': '다운로드', 'hero.secondaryCta': '특징 보기',
+                'features.heading': '게임 <span class="text-primary">특징</span>', 'features.description': '세 명의 마법 소녀를 만나고 자원을 모으며 화려한 RPG 전투 속에서 성장하세요.',
+                'features.card1.title': '세 명의 마법 히로인', 'features.card1.body': '각기 다른 성격, 역할, 마법 능력을 가진 세 히로인을 전환하며 플레이합니다.',
+                'features.card2.title': '캐릭터 성장', 'features.card2.body': '팀을 육성하고 스킬을 해금해 소녀들을 더 강한 모험가로 성장시키세요.',
+                'features.card3.title': '전략 전투', 'features.card3.body': '스킬, 타이밍, 팀 편성을 계획해 마법 스테이지의 적을 물리치세요.',
+                'features.card4.title': '보석 수집', 'features.card4.body': '보석과 자원을 모아 장비, 의상, 특별 능력을 강화하세요.',
+                'features.card5.title': '진행 시스템', 'features.card5.body': '미션을 완료하고 보상을 얻으며 나만의 마법 팀을 꾸준히 성장시키세요.',
+                'features.card6.title': '다국어 스토리', 'features.card6.body': '오른쪽 상단 메뉴에서 영어, 중국어, 일본어, 한국어로 전환할 수 있습니다.',
+                'screenshots.heading': '게임 <span class="text-primary">스크린샷</span>', 'screenshots.description': '캐릭터 장면, 전투 화면, 마법 세계를 미리 확인하세요.',
+                'download.heading': '모험을 준비하세요', 'download.description': 'Tri-Petal은 곧 출시됩니다. 출시 소식을 확인하고 가장 먼저 플레이하세요.', 'download.comingSoon': '출시 예정', 'download.release': '출시 예정: 2026',
+                'footer.privacy': '개인정보 처리방침', privacyMessage: '개인정보 처리방침\n\n이것은 임시 개인정보 처리방침입니다. 출시 전에 공식 내용으로 교체하세요.'
+            }
+        };
+
+        const languageSelect = document.getElementById('languageSelect');
+        let currentLanguage = localStorage.getItem('triPetalLanguage') || 'zh-TW';
+
+        function setLanguage(language) {
+            const dictionary = translations[language] || translations['zh-TW'];
+            document.documentElement.lang = language;
+            document.title = dictionary.title;
+            document.querySelectorAll('[data-i18n]').forEach((element) => {
+                const key = element.dataset.i18n;
+                if (dictionary[key]) element.textContent = dictionary[key];
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach((element) => {
+                const key = element.dataset.i18nHtml;
+                if (dictionary[key]) element.innerHTML = dictionary[key];
+            });
+            languageSelect.value = language;
+            currentLanguage = language;
+            localStorage.setItem('triPetalLanguage', language);
+        }
+
+        languageSelect.addEventListener('change', (event) => setLanguage(event.target.value));
+        setLanguage(currentLanguage);
+
+        const track = document.getElementById('carouselTrack');
+        const slides = Array.from(track.children);
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
+
+        function updateCarousel(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('bg-primary', i === index);
+                ind.classList.toggle('bg-slate-600', i !== index);
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel(currentIndex);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel(currentIndex);
+        });
+
+        indicators.forEach((indicator) => {
+            indicator.addEventListener('click', (event) => {
+                currentIndex = Number(event.target.dataset.index);
+                updateCarousel(currentIndex);
+            });
+        });
+
+        // Privacy link scrolls to #privacy section (handled by anchor href)
+    </script>
+</body>
+</html>
